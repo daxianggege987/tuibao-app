@@ -1,0 +1,36 @@
+{
+  "identifier" : "TuibaoStore",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "9.90",
+      "familyShareable" : false,
+      "internalID" : "tuibao-guide-unlock",
+      "localizations" : [
+        {
+          "description" : "解锁完整退保方法说明文档（占位，可改）",
+          "displayName" : "退保方法说明",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "com.tuibao.guide.unlock",
+      "referenceName" : "Guide Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_storeKitErrors" : [
+
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}
