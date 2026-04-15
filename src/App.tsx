@@ -8,6 +8,9 @@ import { GuideScreen } from './components/GuideScreen'
 import { LegalScreen } from './components/LegalScreen'
 import { SettingsScreen } from './components/SettingsScreen'
 import { ResumeDraftDialog } from './components/ResumeDraftDialog'
+import { KnowledgeScreen } from './components/KnowledgeScreen'
+import { ChecklistScreen } from './components/ChecklistScreen'
+import { ProcessScreen } from './components/ProcessScreen'
 import { hasMeaningfulProgress, loadDraft, useDraft } from './hooks/useDraft'
 import type { DraftPhase } from './hooks/useDraft'
 import { appendAssessmentRecord, loadAssessmentHistory } from './lib/assessmentHistory'
@@ -41,6 +44,9 @@ export default function App() {
     | 'settings'
     | 'legal'
     | 'history'
+    | 'knowledge'
+    | 'checklist'
+    | 'process'
   >('intro')
   const [historyReturnTarget, setHistoryReturnTarget] = useState<
     'intro' | 'settings'
@@ -222,6 +228,9 @@ export default function App() {
           showPurchasedEntry={unlocked}
           onOpenGuide={() => setUiPhase('guide')}
           onOpenSettings={() => setUiPhase('settings')}
+          onOpenKnowledge={() => setUiPhase('knowledge')}
+          onOpenChecklist={() => setUiPhase('checklist')}
+          onOpenProcess={() => setUiPhase('process')}
           historyCount={historyRecords.length}
           onOpenHistory={() => {
             setHistoryReturnTarget('intro')
@@ -299,6 +308,18 @@ export default function App() {
           onUnlocked={handleUnlocked}
           onSkipToHome={handleSkipSuccessToHome}
         />
+      ) : null}
+
+      {uiPhase === 'knowledge' ? (
+        <KnowledgeScreen onBack={() => setUiPhase('intro')} />
+      ) : null}
+
+      {uiPhase === 'checklist' ? (
+        <ChecklistScreen onBack={() => setUiPhase('intro')} />
+      ) : null}
+
+      {uiPhase === 'process' ? (
+        <ProcessScreen onBack={() => setUiPhase('intro')} />
       ) : null}
 
       {uiPhase === 'guide' ? (

@@ -1020,3 +1020,506 @@ button.link-like.link-accent {
   flex-shrink: 0;
   padding: 0.25rem 0;
 }
+
+/* ========== Tool Grid (首页工具入口) ========== */
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 400px;
+  align-self: center;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 0.85rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, transform 0.12s ease;
+}
+
+.tool-card:active {
+  transform: scale(0.98);
+}
+
+.tool-card:hover {
+  border-color: var(--accent);
+}
+
+.tool-card-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.tool-card-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.tool-card-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* ========== Knowledge Screen ========== */
+.knowledge-screen,
+.knowledge-detail-screen {
+  align-items: stretch;
+}
+
+.knowledge-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.knowledge-tag-btn {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.knowledge-tag-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.knowledge-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.knowledge-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease;
+}
+
+.knowledge-card:hover {
+  border-color: var(--accent);
+}
+
+.knowledge-card-tag {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+}
+
+.knowledge-card-title {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.knowledge-card-arrow {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.knowledge-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  margin-top: 0.15rem;
+}
+
+.knowledge-article-body {
+  padding: 0.5rem 0;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.knowledge-article-body p {
+  margin: 0.35rem 0;
+}
+
+.knowledge-bullet {
+  padding-left: 0.5rem;
+  color: var(--text);
+}
+
+.knowledge-numbered {
+  font-weight: 600;
+  margin-top: 0.75rem !important;
+}
+
+.knowledge-disclaimer {
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+/* ========== Checklist Screen ========== */
+.checklist-screen {
+  align-items: stretch;
+}
+
+.checklist-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.checklist-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.checklist-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+
+.checklist-progress-text {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.checklist-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.checklist-item {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.15s ease;
+}
+
+.checklist-item.checked {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+
+.checklist-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+}
+
+.checklist-box {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 0.1rem;
+  transition: all 0.15s ease;
+}
+
+.checklist-box.done {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.checklist-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.checklist-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.checklist-hint {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* ========== Process / Timeline Screen ========== */
+.process-screen {
+  align-items: stretch;
+}
+
+.process-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.process-step {
+  position: relative;
+  padding-left: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.process-step::before {
+  content: '';
+  position: absolute;
+  left: 0.85rem;
+  top: 1.75rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.process-step:last-child::before {
+  display: none;
+}
+
+.process-step.past::before {
+  background: var(--accent);
+}
+
+.process-step-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+}
+
+.process-step-indicator {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  color: var(--muted);
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+.process-step.current .process-step-indicator {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+}
+
+.process-step.past .process-step-indicator {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.process-step-content {
+  flex: 1;
+}
+
+.process-step-title {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.process-step.current .process-step-title {
+  color: var(--accent);
+}
+
+.process-step-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.process-step-duration {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* ========== Analysis Factors (评估报告) ========== */
+.analysis-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.analysis-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.analysis-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.analysis-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.analysis-item.favorable {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+
+.analysis-item.unfavorable {
+  border-color: color-mix(in srgb, var(--error) 25%, var(--border));
+  background: color-mix(in srgb, var(--error) 4%, var(--surface));
+}
+
+.analysis-icon {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 0.1rem;
+}
+
+.analysis-item.favorable .analysis-icon {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+}
+
+.analysis-item.unfavorable .analysis-icon {
+  background: color-mix(in srgb, var(--error) 15%, transparent);
+  color: var(--error);
+}
+
+.analysis-item.neutral .analysis-icon {
+  background: color-mix(in srgb, var(--border) 60%, transparent);
+  color: var(--muted);
+}
+
+.analysis-detail {
+  flex: 1;
+  min-width: 0;
+}
+
+.analysis-label {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.analysis-value {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.analysis-note {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.verdict-score {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+}

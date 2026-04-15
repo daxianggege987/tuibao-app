@@ -26,6 +26,7 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
   const [error, setError] = useState<string | null>(null)
   const [shareBusy, setShareBusy] = useState(false)
   const [shareHint, setShareHint] = useState<string | null>(null)
+  const [showFactors, setShowFactors] = useState(false)
   const native = isNativeApp()
 
   const handleShareSummary = async () => {
@@ -99,7 +100,7 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
       >
         {outcome.eligible ? '✓' : '!'}
       </div>
-      <h1 className="title">提交成功</h1>
+      <h1 className="title">评估报告</h1>
 
       <div
         className={`verdict-card${outcome.eligible ? ' eligible' : ' ineligible'}`}
@@ -108,10 +109,49 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
         <p className="verdict-text">
           {outcome.eligible ? eligibleBody : VERDICT_INELIGIBLE}
         </p>
+        {outcome.totalFactors > 0 ? (
+          <p className="verdict-score">
+            有利因素 {outcome.favorableCount} / {outcome.totalFactors} 项
+          </p>
+        ) : null}
       </div>
 
+      {outcome.factors.length > 0 ? (
+        <section className="analysis-section">
+          <button
+            type="button"
+            className="analysis-toggle"
+            onClick={() => { void impactLight(); setShowFactors((v) => !v) }}
+          >
+            <span>{showFactors ? '收起' : '展开'}逐项分析（{outcome.factors.length} 项）</span>
+            <span aria-hidden>{showFactors ? '▲' : '▼'}</span>
+          </button>
+          {showFactors ? (
+            <ul className="analysis-list">
+              {outcome.factors.map((f) => (
+                <li
+                  key={f.label}
+                  className={`analysis-item${f.favorable === true ? ' favorable' : f.favorable === false ? ' unfavorable' : ' neutral'}`}
+                >
+                  <span className="analysis-icon" aria-hidden>
+                    {f.favorable === true ? '✓' : f.favorable === false ? '✗' : '—'}
+                  </span>
+                  <div className="analysis-detail">
+                    <p className="analysis-label">
+                      {f.label}
+                      <span className="analysis-value">（{f.value}）</span>
+                    </p>
+                    <p className="analysis-note">{f.note}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ) : null}
+
       <p className="body-text subtle">
-        评估规则由系统根据您填写的保全与理赔信息在本机自动判断，结论仅供参考。
+        评估规则由系统根据您填写的信息在本机自动判断，结论仅供参考，不构成法律意见。
       </p>
 
       <button

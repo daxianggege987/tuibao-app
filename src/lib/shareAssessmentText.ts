@@ -20,6 +20,15 @@ export function buildAssessmentShareText(outcome: SubmissionOutcome): string {
     lines.push('初步结论：按当前保全与理赔信息，不符合本次评估中的退保办理条件。')
   }
 
+  if (outcome.totalFactors > 0) {
+    lines.push('', `评估维度：${outcome.favorableCount} / ${outcome.totalFactors} 项有利因素`)
+    for (const f of outcome.factors) {
+      if (f.favorable === null) continue
+      const icon = f.favorable ? '✓' : '✗'
+      lines.push(`${icon} ${f.label}：${f.note}`)
+    }
+  }
+
   lines.push('', `— ${DISCLAIMER_SHORT}`)
   return lines.join('\n')
 }

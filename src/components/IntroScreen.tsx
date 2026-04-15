@@ -1,7 +1,6 @@
 import {
   DISCLAIMER_SHORT,
   INTRO_BODY,
-  INTRO_STEPS,
   INTRO_TITLE,
   PRIVACY_HINT,
 } from '../constants/copy'
@@ -12,6 +11,9 @@ type Props = {
   onOpenGuide?: () => void
   onOpenSettings: () => void
   onOpenHistory?: () => void
+  onOpenKnowledge?: () => void
+  onOpenChecklist?: () => void
+  onOpenProcess?: () => void
   historyCount?: number
 }
 
@@ -21,6 +23,9 @@ export function IntroScreen({
   onOpenGuide,
   onOpenSettings,
   onOpenHistory,
+  onOpenKnowledge,
+  onOpenChecklist,
+  onOpenProcess,
   historyCount = 0,
 }: Props) {
   return (
@@ -42,49 +47,53 @@ export function IntroScreen({
         <p className="body-text">{INTRO_BODY}</p>
       </header>
 
-      <ol className="intro-steps" aria-label="使用步骤">
-        {INTRO_STEPS.map((step, i) => (
-          <li key={step.title} className="intro-step-item">
-            <span className="intro-step-num">{i + 1}</span>
-            <div>
-              <p className="intro-step-title">{step.title}</p>
-              <p className="intro-step-body">{step.body}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-
       <div className="intro-features" aria-label="应用特性">
         <span className="feature-badge">📱 离线可用</span>
         <span className="feature-badge">🔒 数据仅存本机</span>
         <span className="feature-badge">📊 本地评估</span>
       </div>
 
-      <p className="disclaimer">{DISCLAIMER_SHORT}</p>
-      <p className="privacy-hint">{PRIVACY_HINT}</p>
       <div className="intro-actions">
         <button type="button" className="btn primary" onClick={onStart}>
-          开始评估
+          开始退保评估
         </button>
-        {showPurchasedEntry && onOpenGuide ? (
-          <button
-            type="button"
-            className="btn secondary"
-            onClick={onOpenGuide}
-          >
+      </div>
+
+      <section className="tool-grid" aria-label="工具与知识">
+        <button type="button" className="tool-card" onClick={onOpenKnowledge}>
+          <span className="tool-card-icon" aria-hidden>📚</span>
+          <span className="tool-card-label">退保知识库</span>
+          <span className="tool-card-desc">了解退保概念、流程与注意事项</span>
+        </button>
+        <button type="button" className="tool-card" onClick={onOpenChecklist}>
+          <span className="tool-card-icon" aria-hidden>✅</span>
+          <span className="tool-card-label">材料清单</span>
+          <span className="tool-card-desc">逐项准备退保所需材料</span>
+        </button>
+        <button type="button" className="tool-card" onClick={onOpenProcess}>
+          <span className="tool-card-icon" aria-hidden>📋</span>
+          <span className="tool-card-label">流程与进度</span>
+          <span className="tool-card-desc">查看退保步骤、跟踪办理进度</span>
+        </button>
+        {historyCount > 0 && onOpenHistory ? (
+          <button type="button" className="tool-card" onClick={onOpenHistory}>
+            <span className="tool-card-icon" aria-hidden>🗂</span>
+            <span className="tool-card-label">评估记录</span>
+            <span className="tool-card-desc">{historyCount} 条本地记录</span>
+          </button>
+        ) : null}
+      </section>
+
+      {showPurchasedEntry && onOpenGuide ? (
+        <div className="intro-actions">
+          <button type="button" className="btn secondary" onClick={onOpenGuide}>
             查看已购文档
           </button>
-        ) : null}
-        {historyCount > 0 && onOpenHistory ? (
-          <button
-            type="button"
-            className="btn secondary"
-            onClick={onOpenHistory}
-          >
-            评估记录（{historyCount}）
-          </button>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
+
+      <p className="disclaimer">{DISCLAIMER_SHORT}</p>
+      <p className="privacy-hint">{PRIVACY_HINT}</p>
     </div>
   )
 }
