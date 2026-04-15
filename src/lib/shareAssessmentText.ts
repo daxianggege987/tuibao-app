@@ -4,7 +4,7 @@ import { formatCurrencyYuan } from './submissionEvaluation'
 
 /** 供系统分享Sheet使用的纯文本摘要（不含完整问卷答案，降低隐私风险） */
 export function buildAssessmentShareText(outcome: SubmissionOutcome): string {
-  const lines: string[] = ['【退保免费评估】摘要', '']
+  const lines: string[] = ['【退保评估】摘要', '']
 
   if (outcome.eligible) {
     if (outcome.estimatedRefund != null) {

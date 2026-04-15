@@ -54,6 +54,12 @@ export function IntroScreen({
         ))}
       </ol>
 
+      <div className="intro-features" aria-label="应用特性">
+        <span className="feature-badge">📱 离线可用</span>
+        <span className="feature-badge">🔒 数据仅存本机</span>
+        <span className="feature-badge">📊 本地评估</span>
+      </div>
+
       <p className="disclaimer">{DISCLAIMER_SHORT}</p>
       <p className="privacy-hint">{PRIVACY_HINT}</p>
       <div className="intro-actions">

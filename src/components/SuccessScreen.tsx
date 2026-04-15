@@ -12,7 +12,6 @@ import {
   isNativeApp,
   restoreGuidePurchase,
 } from '../lib/iapBridge'
-import { simulateDemoUnlock } from '../lib/unlock'
 import { buildAssessmentShareText, shareAssessmentText } from '../lib/shareAssessmentText'
 import { impactLight, impactMedium } from '../lib/nativeFeedback'
 
@@ -82,12 +81,6 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
     }
   }
 
-  const handleDemoUnlock = () => {
-    simulateDemoUnlock()
-    void impactMedium()
-    onUnlocked()
-  }
-
   const amountText =
     outcome.estimatedRefund != null
       ? formatCurrencyYuan(outcome.estimatedRefund)
@@ -96,7 +89,7 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
   const eligibleBody =
     outcome.estimatedRefund != null
       ? VERDICT_ELIGIBLE_TEMPLATE.replace('{amount}', amountText)
-      : '恭喜您，您的保险可以申请退保。因交费数据不完整，暂无法估算退保金额。具体操作方法，请购买后查看，如需协助操作，请付款后联系客服微信。'
+      : '根据您填写的信息，初步评估可申请退保。因交费数据不完整，暂无法估算退保金额。如需了解操作流程，可解锁《退保方法说明》查阅。'
 
   return (
     <div className="screen success-screen">
@@ -118,7 +111,7 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
       </div>
 
       <p className="body-text subtle">
-        我们已收到您的测评信息。以下为后续指引（评估规则由系统根据您填写的保全与理赔信息自动判断）。
+        评估规则由系统根据您填写的保全与理赔信息在本机自动判断，结论仅供参考。
       </p>
 
       <button
@@ -161,21 +154,7 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
                 恢复购买
               </button>
             </>
-          ) : (
-            <div className="web-demo-hint">
-              <p className="body-text small">
-                当前为浏览器环境，无法调起 App Store。请在 Xcode 运行 iOS App
-                体验真实内购；或在下方使用演示入口查看文档占位页。
-              </p>
-              <button
-                type="button"
-                className="btn primary"
-                onClick={handleDemoUnlock}
-              >
-                演示：模拟已解锁
-              </button>
-            </div>
-          )}
+          ) : null}
 
           {error ? (
             <p className="field-error" role="alert">

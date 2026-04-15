@@ -1,9 +1,9 @@
 /** 定稿文案：开场、免责声明、分组标题（与题库分离便于法务迭代） */
 
-export const INTRO_TITLE = '退保免费评估'
+export const INTRO_TITLE = '退保评估'
 
 export const INTRO_BODY =
-  '您好，帮您免费评估一下，看看您的情况是否符合全额退保。以下为投保人需回答的问题。'
+  '通过回答保单、交费与保全相关问题，系统将在本机为您生成初步评估结论，帮助您了解当前情况。'
 
 /** 首页三步流程说明（仅展示，无额外逻辑） */
 export const INTRO_STEPS: readonly { title: string; body: string }[] = [
@@ -34,7 +34,7 @@ export const DISCLAIMER_REVIEW =
 export const PURCHASE_TITLE = '获取《退保操作指南》'
 
 export const PURCHASE_BODY =
-  '解锁后可查看完整退保方法说明（内容由运营配置）。购买通过 App Store 应用内购买完成，一次购买可在此设备上恢复。文档仅供学习参考，不构成法律意见。'
+  '解锁后可在应用内阅读完整的退保方法说明（含分页浏览与 PDF 分享）。购买通过 App Store 完成，一次购买可在同一 Apple ID 下恢复。文档仅供学习参考，不构成法律意见。'
 
 /** 可选：链接到「付费后如何下载」说明（需配置 VITE_POST_PURCHASE_HELP_URL） */
 export const POST_PURCHASE_HELP_LABEL = '付费后如何获取文档？'
@@ -42,11 +42,11 @@ export const POST_PURCHASE_HELP_LABEL = '付费后如何获取文档？'
 /** 付费解锁后展示区：占位，后续由运营替换为正式 HTML/Markdown 渲染 */
 /** 保全与理赔三题任一为「是」 */
 export const VERDICT_INELIGIBLE =
-  '抱歉，您的保险退保无法办理'
+  '根据您填写的保全与理赔信息，当前不符合本评估中的退保条件。如有疑问，建议咨询保险公司或专业人士。'
 
 /** 三题全为「否」时展示；{amount} 为格式化金额 */
 export const VERDICT_ELIGIBLE_TEMPLATE =
-  '恭喜您，您的保险可以申请退保。退保金额大概为 {amount} 元。具体操作方法，请购买后查看，如需协助操作，请付款后联系客服微信。'
+  '根据您填写的信息，初步评估可申请退保。预估退保金额约 {amount} 元（仅供参考，以保险公司实际核算为准）。如需了解操作流程，可解锁《退保方法说明》查阅。'
 
 /** 已购文档为 public/tuibao.pdf，更新文档时替换该文件即可 */
 export const GUIDE_INTRO =

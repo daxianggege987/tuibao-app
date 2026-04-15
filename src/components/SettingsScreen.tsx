@@ -5,7 +5,6 @@ import {
   APP_DISPLAY_NAME,
   APP_VERSION,
   CONTACT_EMAIL,
-  CONTACT_WECHAT_HINT,
   PRIVACY_POLICY_URL,
   TERMS_OF_SERVICE_URL,
 } from '../constants/appMeta'
@@ -128,11 +127,13 @@ export function SettingsScreen({
         </button>
       </section>
 
-      <section className="settings-card" aria-labelledby="contact-h">
-        <h2 id="contact-h" className="settings-section-title">
-          联系我们
+      <section className="settings-card" aria-labelledby="feedback-h">
+        <h2 id="feedback-h" className="settings-section-title">
+          问题反馈
         </h2>
-        <p className="body-text small settings-contact-hint">{CONTACT_WECHAT_HINT}</p>
+        <p className="body-text small settings-contact-hint">
+          如遇功能异常或有改进建议，欢迎通过邮件反馈。
+        </p>
         <div className="settings-email-row">
           <code className="settings-email">{CONTACT_EMAIL}</code>
           <button type="button" className="btn secondary settings-copy-btn" onClick={copyEmail}>
