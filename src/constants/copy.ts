@@ -3,7 +3,7 @@
 export const INTRO_TITLE = '退保评估'
 
 export const INTRO_BODY =
-  '通过回答保单、交费与保全相关问题，系统将在本机为您生成初步评估结论，帮助您了解当前情况。'
+  '一站式退保工具：评估退保条件、估算退保金额、准备退保材料、跟踪办理进度。所有数据仅存本机，完全离线可用。'
 
 /** 首页三步流程说明（仅展示，无额外逻辑） */
 export const INTRO_STEPS: readonly { title: string; body: string }[] = [
@@ -42,11 +42,11 @@ export const POST_PURCHASE_HELP_LABEL = '付费后如何获取文档？'
 /** 付费解锁后展示区：占位，后续由运营替换为正式 HTML/Markdown 渲染 */
 /** 保全与理赔三题任一为「是」 */
 export const VERDICT_INELIGIBLE =
-  '根据您填写的保全与理赔信息，当前不符合本评估中的退保条件。如有疑问，建议咨询保险公司或专业人士。'
+  '根据您填写的保全与理赔信息，当前不符合本评估中的退保条件。建议查阅「退保知识库」了解更多信息，或致电保险公司客服咨询。'
 
 /** 三题全为「否」时展示；{amount} 为格式化金额 */
 export const VERDICT_ELIGIBLE_TEMPLATE =
-  '根据您填写的信息，初步评估可申请退保。预估退保金额约 {amount} 元（仅供参考，以保险公司实际核算为准）。如需了解操作流程，可解锁《退保方法说明》查阅。'
+  '根据您填写的信息，初步评估可申请退保。预估退保金额约 {amount} 元（仅供参考，以保险公司实际核算为准）。建议查看下方「下一步行动」了解退保流程和所需材料。'
 
 /** 已购文档为 public/tuibao.pdf，更新文档时替换该文件即可 */
 export const GUIDE_INTRO =

@@ -19,14 +19,27 @@ type Props = {
   outcome: SubmissionOutcome
   onUnlocked: () => void
   onSkipToHome: () => void
+  onGoChecklist: () => void
+  onGoProcess: () => void
+  onGoKnowledge: () => void
+  onGoCalculator: () => void
 }
 
-export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
+export function SuccessScreen({
+  outcome,
+  onUnlocked,
+  onSkipToHome,
+  onGoChecklist,
+  onGoProcess,
+  onGoKnowledge,
+  onGoCalculator,
+}: Props) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [shareBusy, setShareBusy] = useState(false)
   const [shareHint, setShareHint] = useState<string | null>(null)
   const [showFactors, setShowFactors] = useState(false)
+  const [showPurchase, setShowPurchase] = useState(false)
   const native = isNativeApp()
 
   const handleShareSummary = async () => {
@@ -90,7 +103,7 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
   const eligibleBody =
     outcome.estimatedRefund != null
       ? VERDICT_ELIGIBLE_TEMPLATE.replace('{amount}', amountText)
-      : '根据您填写的信息，初步评估可申请退保。因交费数据不完整，暂无法估算退保金额。如需了解操作流程，可解锁《退保方法说明》查阅。'
+      : '根据您填写的信息，初步评估可申请退保。因交费数据不完整，暂无法估算退保金额。建议查看下方工具进一步了解。'
 
   return (
     <div className="screen success-screen">
@@ -116,6 +129,7 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
         ) : null}
       </div>
 
+      {/* 逐项分析 */}
       {outcome.factors.length > 0 ? (
         <section className="analysis-section">
           <button
@@ -150,6 +164,29 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
         </section>
       ) : null}
 
+      {/* 下一步行动建议 — 免费闭环 */}
+      <section className="next-steps-section">
+        <h2 className="next-steps-title">下一步行动</h2>
+        <div className="next-steps-grid">
+          <button type="button" className="next-step-card" onClick={onGoChecklist}>
+            <span className="next-step-icon" aria-hidden>✅</span>
+            <span className="next-step-label">准备退保材料</span>
+          </button>
+          <button type="button" className="next-step-card" onClick={onGoProcess}>
+            <span className="next-step-icon" aria-hidden>📋</span>
+            <span className="next-step-label">查看退保流程</span>
+          </button>
+          <button type="button" className="next-step-card" onClick={onGoCalculator}>
+            <span className="next-step-icon" aria-hidden>🧮</span>
+            <span className="next-step-label">精确估算金额</span>
+          </button>
+          <button type="button" className="next-step-card" onClick={onGoKnowledge}>
+            <span className="next-step-icon" aria-hidden>📚</span>
+            <span className="next-step-label">退保知识库</span>
+          </button>
+        </div>
+      </section>
+
       <p className="body-text subtle">
         评估规则由系统根据您填写的信息在本机自动判断，结论仅供参考，不构成法律意见。
       </p>
@@ -168,47 +205,46 @@ export function SuccessScreen({ outcome, onUnlocked, onSkipToHome }: Props) {
         </p>
       ) : null}
 
-      {outcome.eligible ? (
-        <section className="purchase-card" aria-labelledby="purchase-heading">
-          <h2 id="purchase-heading" className="purchase-title">
-            {PURCHASE_TITLE}
-          </h2>
-          <p className="purchase-body">{PURCHASE_BODY}</p>
-
-          {native ? (
-            <>
+      {/* IAP 折叠 — 弱化为可选附加内容 */}
+      {outcome.eligible && native ? (
+        <section className="iap-collapsed-section">
+          <button
+            type="button"
+            className="iap-collapsed-toggle"
+            onClick={() => { void impactLight(); setShowPurchase((v) => !v) }}
+          >
+            <span>还需要更详细的退保指南？</span>
+            <span className="iap-collapsed-arrow" aria-hidden>{showPurchase ? '▲' : '▼'}</span>
+          </button>
+          {showPurchase ? (
+            <div className="iap-collapsed-content">
+              <h3 className="iap-collapsed-title">{PURCHASE_TITLE}</h3>
+              <p className="iap-collapsed-body">{PURCHASE_BODY}</p>
               <button
                 type="button"
-                className="btn primary"
+                className="btn secondary"
                 disabled={busy}
                 onClick={() => void handlePurchase()}
               >
-                {busy ? '处理中…' : '使用 App Store 解锁'}
+                {busy ? '处理中…' : '通过 App Store 解锁'}
               </button>
               <button
                 type="button"
-                className="btn secondary purchase-restore"
+                className="btn-text iap-restore-link"
                 disabled={busy}
                 onClick={() => void handleRestore()}
               >
-                恢复购买
+                恢复已购买内容
               </button>
-            </>
-          ) : null}
-
-          {error ? (
-            <p className="field-error" role="alert">
-              {error}
-            </p>
+              {error ? (
+                <p className="field-error" role="alert">{error}</p>
+              ) : null}
+            </div>
           ) : null}
         </section>
-      ) : (
-        <p className="body-text muted-block">
-          当前评估结果不支持继续办理退保相关服务，无需购买操作指引。
-        </p>
-      )}
+      ) : null}
 
-      <button type="button" className="btn secondary wide" onClick={onSkipToHome}>
+      <button type="button" className="btn primary wide" onClick={onSkipToHome}>
         返回首页
       </button>
     </div>

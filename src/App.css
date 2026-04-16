@@ -1523,3 +1523,344 @@ button.link-like.link-accent {
   font-weight: 600;
   color: var(--accent);
 }
+
+/* ========== Next Steps (评估后行动建议) ========== */
+.next-steps-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.next-steps-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.next-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.next-step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, transform 0.12s ease;
+}
+
+.next-step-card:active {
+  transform: scale(0.97);
+}
+
+.next-step-card:hover {
+  border-color: var(--accent);
+}
+
+.next-step-icon {
+  font-size: 1.3rem;
+}
+
+.next-step-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ========== IAP Collapsed (弱化付费区域) ========== */
+.iap-collapsed-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.iap-collapsed-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.iap-collapsed-arrow {
+  font-size: 0.7rem;
+}
+
+.iap-collapsed-content {
+  margin-top: 0.5rem;
+  padding: 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.iap-collapsed-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.iap-collapsed-body {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.iap-restore-link {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* ========== Calculator Screen ========== */
+.calculator-screen {
+  align-items: stretch;
+}
+
+.calc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.calc-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.calc-auto-total {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.calc-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.calc-divider::before,
+.calc-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.calc-divider-text {
+  font-size: 0.82rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.calc-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.calc-actions .btn {
+  width: 100%;
+}
+
+.calc-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.calc-result-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.calc-result-total {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.calc-range-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.calc-range-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.calc-range-item.pessimistic {
+  border-color: color-mix(in srgb, var(--error) 25%, var(--border));
+  background: color-mix(in srgb, var(--error) 4%, var(--surface));
+}
+
+.calc-range-item.moderate {
+  border-color: color-mix(in srgb, #f5a623 30%, var(--border));
+  background: color-mix(in srgb, #f5a623 5%, var(--surface));
+}
+
+.calc-range-item.optimistic {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+
+.calc-range-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.calc-range-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.calc-range-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.calc-loss-hint {
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--error) 6%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--error) 20%, var(--border));
+}
+
+.calc-loss-hint p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.calc-tips {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+}
+
+.calc-tips-title {
+  margin: 0 0 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.calc-tips-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.calc-tips-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* ========== FAQ Screen ========== */
+.faq-screen {
+  align-items: stretch;
+}
+
+.faq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.faq-item {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.faq-item.open {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.faq-arrow {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.faq-answer {
+  padding: 0 0.85rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+  animation: fadeIn 0.2s ease;
+}
+
+.faq-answer p {
+  margin: 0.2rem 0;
+}

@@ -14,6 +14,8 @@ type Props = {
   onOpenKnowledge?: () => void
   onOpenChecklist?: () => void
   onOpenProcess?: () => void
+  onOpenCalculator?: () => void
+  onOpenFaq?: () => void
   historyCount?: number
 }
 
@@ -26,6 +28,8 @@ export function IntroScreen({
   onOpenKnowledge,
   onOpenChecklist,
   onOpenProcess,
+  onOpenCalculator,
+  onOpenFaq,
   historyCount = 0,
 }: Props) {
   return (
@@ -60,10 +64,10 @@ export function IntroScreen({
       </div>
 
       <section className="tool-grid" aria-label="工具与知识">
-        <button type="button" className="tool-card" onClick={onOpenKnowledge}>
-          <span className="tool-card-icon" aria-hidden>📚</span>
-          <span className="tool-card-label">退保知识库</span>
-          <span className="tool-card-desc">了解退保概念、流程与注意事项</span>
+        <button type="button" className="tool-card" onClick={onOpenCalculator}>
+          <span className="tool-card-icon" aria-hidden>🧮</span>
+          <span className="tool-card-label">退保金估算</span>
+          <span className="tool-card-desc">快速估算可退回金额范围</span>
         </button>
         <button type="button" className="tool-card" onClick={onOpenChecklist}>
           <span className="tool-card-icon" aria-hidden>✅</span>
@@ -74,6 +78,16 @@ export function IntroScreen({
           <span className="tool-card-icon" aria-hidden>📋</span>
           <span className="tool-card-label">流程与进度</span>
           <span className="tool-card-desc">查看退保步骤、跟踪办理进度</span>
+        </button>
+        <button type="button" className="tool-card" onClick={onOpenKnowledge}>
+          <span className="tool-card-icon" aria-hidden>📚</span>
+          <span className="tool-card-label">退保知识库</span>
+          <span className="tool-card-desc">10 篇科普文章，系统了解退保</span>
+        </button>
+        <button type="button" className="tool-card" onClick={onOpenFaq}>
+          <span className="tool-card-icon" aria-hidden>❓</span>
+          <span className="tool-card-label">常见问题</span>
+          <span className="tool-card-desc">12 个高频问题快速解答</span>
         </button>
         {historyCount > 0 && onOpenHistory ? (
           <button type="button" className="tool-card" onClick={onOpenHistory}>

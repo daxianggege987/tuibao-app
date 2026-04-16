@@ -11,6 +11,8 @@ import { ResumeDraftDialog } from './components/ResumeDraftDialog'
 import { KnowledgeScreen } from './components/KnowledgeScreen'
 import { ChecklistScreen } from './components/ChecklistScreen'
 import { ProcessScreen } from './components/ProcessScreen'
+import { CalculatorScreen } from './components/CalculatorScreen'
+import { FaqScreen } from './components/FaqScreen'
 import { hasMeaningfulProgress, loadDraft, useDraft } from './hooks/useDraft'
 import type { DraftPhase } from './hooks/useDraft'
 import { appendAssessmentRecord, loadAssessmentHistory } from './lib/assessmentHistory'
@@ -47,6 +49,8 @@ export default function App() {
     | 'knowledge'
     | 'checklist'
     | 'process'
+    | 'calculator'
+    | 'faq'
   >('intro')
   const [historyReturnTarget, setHistoryReturnTarget] = useState<
     'intro' | 'settings'
@@ -231,6 +235,8 @@ export default function App() {
           onOpenKnowledge={() => setUiPhase('knowledge')}
           onOpenChecklist={() => setUiPhase('checklist')}
           onOpenProcess={() => setUiPhase('process')}
+          onOpenCalculator={() => setUiPhase('calculator')}
+          onOpenFaq={() => setUiPhase('faq')}
           historyCount={historyRecords.length}
           onOpenHistory={() => {
             setHistoryReturnTarget('intro')
@@ -307,6 +313,10 @@ export default function App() {
           outcome={submissionOutcome}
           onUnlocked={handleUnlocked}
           onSkipToHome={handleSkipSuccessToHome}
+          onGoChecklist={() => setUiPhase('checklist')}
+          onGoProcess={() => setUiPhase('process')}
+          onGoKnowledge={() => setUiPhase('knowledge')}
+          onGoCalculator={() => setUiPhase('calculator')}
         />
       ) : null}
 
@@ -320,6 +330,14 @@ export default function App() {
 
       {uiPhase === 'process' ? (
         <ProcessScreen onBack={() => setUiPhase('intro')} />
+      ) : null}
+
+      {uiPhase === 'calculator' ? (
+        <CalculatorScreen onBack={() => setUiPhase('intro')} />
+      ) : null}
+
+      {uiPhase === 'faq' ? (
+        <FaqScreen onBack={() => setUiPhase('intro')} />
       ) : null}
 
       {uiPhase === 'guide' ? (
