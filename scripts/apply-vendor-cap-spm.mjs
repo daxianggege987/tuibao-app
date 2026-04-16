@@ -23,6 +23,7 @@ const shimPkg = path.join(root, 'ios/App/CapApp-SPM/Vendor/capacitor-swift-pm-lo
 const capacitorPluginPackageSwifts = [
   'node_modules/@capacitor/browser/Package.swift',
   'node_modules/@capacitor/haptics/Package.swift',
+  'node_modules/@capacitor-community/admob/Package.swift',
 ]
 
 const hasVendor = fs.existsSync(vendorCap) && fs.existsSync(vendorCordova) && fs.existsSync(shimPkg)

@@ -1,7 +1,7 @@
 {
   "name": "tuibao-app",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.3.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,7 @@
     "ios:sync": "npm run build && npx cap sync ios && node scripts/apply-vendor-cap-spm.mjs"
   },
   "dependencies": {
+    "@capacitor-community/admob": "^8.0.0",
     "@capacitor/browser": "^8.0.3",
     "@capacitor/core": "^8.3.0",
     "@capacitor/haptics": "^8.0.2",

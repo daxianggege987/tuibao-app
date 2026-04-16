@@ -15,6 +15,7 @@ export const LEGAL_PRIVACY_BODY = `隐私政策
 
 四、第三方服务
 • Apple：应用分发、应用内购买受 Apple 条款与隐私政策约束。
+• Google 广告（AdMob）：本应用集成 Google 移动广告 SDK，用于展示广告。Google 可能处理设备标识符、广告标识符（如经您授权）、IP 地址等用于广告投放与衡量，详见 Google 隐私政策（policies.google.com/privacy）。iOS 上可能通过系统「应用跟踪透明度」请求授权，您可在系统设置中关闭。
 • 打开链接：当您在本应用内打开外部链接时，该网站的信息处理规则由其自行负责。
 
 五、您的权利

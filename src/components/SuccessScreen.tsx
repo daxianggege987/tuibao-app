@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   PURCHASE_BODY,
   PURCHASE_TITLE,
@@ -14,6 +14,7 @@ import {
 } from '../lib/iapBridge'
 import { buildAssessmentShareText, shareAssessmentText } from '../lib/shareAssessmentText'
 import { impactLight, impactMedium } from '../lib/nativeFeedback'
+import { showInterstitialAfterAssessment } from '../lib/adMobInit'
 
 type Props = {
   outcome: SubmissionOutcome
@@ -40,6 +41,10 @@ export function SuccessScreen({
   const [shareHint, setShareHint] = useState<string | null>(null)
   const [showFactors, setShowFactors] = useState(false)
   const native = isNativeApp()
+
+  useEffect(() => {
+    void showInterstitialAfterAssessment()
+  }, [])
 
   const handleShareSummary = async () => {
     setShareHint(null)

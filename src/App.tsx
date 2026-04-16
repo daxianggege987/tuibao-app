@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { QUESTIONS } from './data/questions'
 import { IntroScreen } from './components/IntroScreen'
 import { QuestionScreen } from './components/QuestionScreen'
@@ -24,6 +24,7 @@ import { evaluateSubmission } from './lib/submissionEvaluation'
 import type { SubmissionOutcome } from './lib/submissionEvaluation'
 import { impactLight, impactMedium } from './lib/nativeFeedback'
 import { HistoryScreen } from './components/HistoryScreen'
+import { initAdMobOnce, syncBannerForPhase } from './lib/adMobInit'
 import './App.css'
 
 const initialDraft = (): import('./hooks/useDraft').DraftState => ({
@@ -219,6 +220,14 @@ export default function App() {
     () => `app-shell phase-${uiPhase}`,
     [uiPhase],
   )
+
+  useEffect(() => {
+    void initAdMobOnce()
+  }, [])
+
+  useEffect(() => {
+    void syncBannerForPhase(uiPhase)
+  }, [uiPhase])
 
   return (
     <div className={shellClass}>
