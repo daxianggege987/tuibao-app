@@ -1576,60 +1576,86 @@ button.link-like.link-accent {
   color: var(--text);
 }
 
-/* ========== IAP Collapsed (弱化付费区域) ========== */
-.iap-collapsed-section {
+/* ========== IAP Highlight Card (醒目购买卡片) ========== */
+.iap-highlight-card {
+  position: relative;
   width: 100%;
   max-width: 400px;
-}
-
-.iap-collapsed-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.6rem 0.85rem;
+  padding: 1.15rem 1.1rem 1rem;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.88rem;
-  color: var(--muted);
-}
-
-.iap-collapsed-arrow {
-  font-size: 0.7rem;
-}
-
-.iap-collapsed-content {
-  margin-top: 0.5rem;
-  padding: 0.85rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
+  border: 2px solid var(--accent);
+  background: linear-gradient(
+    168deg,
+    color-mix(in srgb, var(--accent) 8%, var(--surface)) 0%,
+    var(--surface) 100%
+  );
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--accent) 12%, transparent);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow: hidden;
 }
 
-.iap-collapsed-title {
-  margin: 0;
-  font-size: 0.95rem;
+.iap-highlight-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.2rem 0.85rem 0.25rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 0 0 0 10px;
 }
 
-.iap-collapsed-body {
+.iap-highlight-title {
   margin: 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.5;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
 }
 
-.iap-restore-link {
-  font-size: 0.85rem;
+.iap-highlight-body {
+  margin: 0;
+  font-size: 0.88rem;
   color: var(--muted);
+  line-height: 1.55;
+}
+
+.btn.iap-highlight-btn {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 0.25rem;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 80%, #000) 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--accent) 30%, transparent);
+  transition: transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.btn.iap-highlight-btn:hover:not(:disabled) {
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.btn.iap-highlight-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.iap-highlight-restore {
+  font-size: 0.85rem;
+  color: var(--accent);
   text-align: center;
   text-decoration: underline;
+  opacity: 0.85;
+}
+
+.iap-highlight-restore:hover {
+  opacity: 1;
 }
 
 /* ========== Calculator Screen ========== */

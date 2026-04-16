@@ -39,7 +39,6 @@ export function SuccessScreen({
   const [shareBusy, setShareBusy] = useState(false)
   const [shareHint, setShareHint] = useState<string | null>(null)
   const [showFactors, setShowFactors] = useState(false)
-  const [showPurchase, setShowPurchase] = useState(false)
   const native = isNativeApp()
 
   const handleShareSummary = async () => {
@@ -187,6 +186,34 @@ export function SuccessScreen({
         </div>
       </section>
 
+      {/* IAP — 醒目购买卡片 */}
+      {outcome.eligible && native ? (
+        <section className="iap-highlight-card" aria-labelledby="iap-heading">
+          <div className="iap-highlight-badge" aria-hidden>推荐</div>
+          <h2 id="iap-heading" className="iap-highlight-title">{PURCHASE_TITLE}</h2>
+          <p className="iap-highlight-body">{PURCHASE_BODY}</p>
+          <button
+            type="button"
+            className="btn iap-highlight-btn"
+            disabled={busy}
+            onClick={() => void handlePurchase()}
+          >
+            {busy ? '处理中…' : '立即解锁 · App Store'}
+          </button>
+          <button
+            type="button"
+            className="btn-text iap-highlight-restore"
+            disabled={busy}
+            onClick={() => void handleRestore()}
+          >
+            已购买？恢复购买
+          </button>
+          {error ? (
+            <p className="field-error" role="alert">{error}</p>
+          ) : null}
+        </section>
+      ) : null}
+
       <p className="body-text subtle">
         评估规则由系统根据您填写的信息在本机自动判断，结论仅供参考，不构成法律意见。
       </p>
@@ -203,45 +230,6 @@ export function SuccessScreen({
         <p className="body-text small muted-block" role="status">
           {shareHint}
         </p>
-      ) : null}
-
-      {/* IAP 折叠 — 弱化为可选附加内容 */}
-      {outcome.eligible && native ? (
-        <section className="iap-collapsed-section">
-          <button
-            type="button"
-            className="iap-collapsed-toggle"
-            onClick={() => { void impactLight(); setShowPurchase((v) => !v) }}
-          >
-            <span>还需要更详细的退保指南？</span>
-            <span className="iap-collapsed-arrow" aria-hidden>{showPurchase ? '▲' : '▼'}</span>
-          </button>
-          {showPurchase ? (
-            <div className="iap-collapsed-content">
-              <h3 className="iap-collapsed-title">{PURCHASE_TITLE}</h3>
-              <p className="iap-collapsed-body">{PURCHASE_BODY}</p>
-              <button
-                type="button"
-                className="btn secondary"
-                disabled={busy}
-                onClick={() => void handlePurchase()}
-              >
-                {busy ? '处理中…' : '通过 App Store 解锁'}
-              </button>
-              <button
-                type="button"
-                className="btn-text iap-restore-link"
-                disabled={busy}
-                onClick={() => void handleRestore()}
-              >
-                恢复已购买内容
-              </button>
-              {error ? (
-                <p className="field-error" role="alert">{error}</p>
-              ) : null}
-            </div>
-          ) : null}
-        </section>
       ) : null}
 
       <button type="button" className="btn primary wide" onClick={onSkipToHome}>
