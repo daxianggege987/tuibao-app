@@ -30,6 +30,12 @@ export const DISCLAIMER_SHORT =
 export const DISCLAIMER_REVIEW =
   '提交即表示您已阅读并理解：上述信息将用于初步评估参考，不构成任何法律承诺或结果保证。具体退保条件以保险合同、保险公司规则及有权机关认定为准。'
 
+/** 首页内购卡片标题（与 App Store Connect 商品展示名对齐，便于审核识别） */
+export const HOME_IAP_CARD_TITLE = '获取全额退保方法'
+
+export const HOME_IAP_CARD_BODY =
+  '通过 App Store 解锁完整退保方法说明（分页阅读与 PDF 分享）。与评估报告页为同一内购项目。'
+
 /** 付费引导（成功页）；具体交付方式由业务在支付后台/邮件中完成 */
 export const PURCHASE_TITLE = '获取《退保操作指南》'
 

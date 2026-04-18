@@ -25,6 +25,11 @@ import type { SubmissionOutcome } from './lib/submissionEvaluation'
 import { impactLight, impactMedium } from './lib/nativeFeedback'
 import { HistoryScreen } from './components/HistoryScreen'
 import { initAdMobOnce, syncBannerForPhase } from './lib/adMobInit'
+import {
+  isNativeApp,
+  purchaseGuideWithAppStore,
+  restoreGuidePurchase,
+} from './lib/iapBridge'
 import './App.css'
 
 const initialDraft = (): import('./hooks/useDraft').DraftState => ({
@@ -66,6 +71,8 @@ export default function App() {
     hasMeaningfulProgress(loadDraft()),
   )
   const [unlockVersion, setUnlockVersion] = useState(0)
+  const [iapBusy, setIapBusy] = useState(false)
+  const [iapError, setIapError] = useState<string | null>(null)
   const [submissionOutcome, setSubmissionOutcome] =
     useState<SubmissionOutcome | null>(null)
 
@@ -211,6 +218,45 @@ export default function App() {
     setUiPhase('guide')
   }
 
+  const handleIntroPurchaseGuide = async () => {
+    setIapError(null)
+    setIapBusy(true)
+    try {
+      await purchaseGuideWithAppStore()
+      await impactMedium()
+      setUnlockVersion((v) => v + 1)
+      setUiPhase('guide')
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
+      if (msg.includes('USER_CANCELLED') || msg.includes('User cancelled')) {
+        setIapError('已取消支付')
+      } else {
+        setIapError(msg || '购买失败，请稍后重试')
+      }
+    } finally {
+      setIapBusy(false)
+    }
+  }
+
+  const handleIntroRestorePurchase = async () => {
+    setIapError(null)
+    setIapBusy(true)
+    try {
+      const ok = await restoreGuidePurchase()
+      if (ok) {
+        await impactMedium()
+        setUnlockVersion((v) => v + 1)
+        setUiPhase('guide')
+      } else {
+        setIapError('未找到可恢复的购买记录')
+      }
+    } catch (e) {
+      setIapError(e instanceof Error ? e.message : '恢复失败')
+    } finally {
+      setIapBusy(false)
+    }
+  }
+
   const onAnswerChange = (value: string) => {
     if (!currentQuestion) return
     setAnswerCascade(currentQuestion.id, value)
@@ -251,6 +297,11 @@ export default function App() {
             setHistoryReturnTarget('intro')
             setUiPhase('history')
           }}
+          isNativeIap={isNativeApp()}
+          onPurchaseGuide={handleIntroPurchaseGuide}
+          onRestorePurchase={handleIntroRestorePurchase}
+          purchaseBusy={iapBusy}
+          purchaseError={iapError}
         />
       ) : null}
 

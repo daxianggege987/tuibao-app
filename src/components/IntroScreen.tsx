@@ -1,5 +1,7 @@
 import {
   DISCLAIMER_SHORT,
+  HOME_IAP_CARD_BODY,
+  HOME_IAP_CARD_TITLE,
   INTRO_BODY,
   INTRO_TITLE,
   PRIVACY_HINT,
@@ -17,6 +19,12 @@ type Props = {
   onOpenCalculator?: () => void
   onOpenFaq?: () => void
   historyCount?: number
+  /** 仅 iOS 原生：首页展示内购卡片 */
+  isNativeIap?: boolean
+  onPurchaseGuide?: () => void | Promise<void>
+  onRestorePurchase?: () => void | Promise<void>
+  purchaseBusy?: boolean
+  purchaseError?: string | null
 }
 
 export function IntroScreen({
@@ -31,6 +39,11 @@ export function IntroScreen({
   onOpenCalculator,
   onOpenFaq,
   historyCount = 0,
+  isNativeIap = false,
+  onPurchaseGuide,
+  onRestorePurchase,
+  purchaseBusy = false,
+  purchaseError = null,
 }: Props) {
   return (
     <div className="screen intro-screen">
@@ -57,11 +70,68 @@ export function IntroScreen({
         <span className="feature-badge">📊 本地评估</span>
       </div>
 
-      <div className="intro-actions">
-        <button type="button" className="btn primary" onClick={onStart}>
-          开始退保评估
-        </button>
-      </div>
+      <section className="intro-hero-strip" aria-label="主要功能与内购">
+        <p className="intro-hero-strip-label">主要功能</p>
+        <div
+          className={
+            isNativeIap && onPurchaseGuide && onRestorePurchase
+              ? 'intro-hero-row intro-hero-row--dual'
+              : 'intro-hero-row intro-hero-row--single'
+          }
+        >
+          <button
+            type="button"
+            className="intro-hero-card intro-hero-card--start"
+            onClick={onStart}
+          >
+            <span className="intro-hero-card-icon" aria-hidden>📋</span>
+            <span className="intro-hero-card-title">开始退保评估</span>
+            <span className="intro-hero-card-desc">
+              填写问卷，在本机生成评估报告与逐项分析
+            </span>
+          </button>
+
+          {isNativeIap && onPurchaseGuide && onRestorePurchase ? (
+            showPurchasedEntry && onOpenGuide ? (
+              <button
+                type="button"
+                className="intro-hero-card intro-hero-card--iap intro-hero-card--unlocked"
+                onClick={onOpenGuide}
+              >
+                <span className="intro-hero-card-icon" aria-hidden>✓</span>
+                <span className="intro-hero-card-title">{HOME_IAP_CARD_TITLE}</span>
+                <span className="intro-hero-card-desc">您已解锁，可查看完整说明文档</span>
+                <span className="intro-hero-card-cta">查看已购文档 ›</span>
+              </button>
+            ) : (
+              <div className="intro-hero-card intro-hero-card--iap">
+                <span className="intro-hero-card-icon" aria-hidden>📄</span>
+                <span className="intro-hero-card-title">{HOME_IAP_CARD_TITLE}</span>
+                <span className="intro-hero-card-desc">{HOME_IAP_CARD_BODY}</span>
+                <button
+                  type="button"
+                  className="btn intro-hero-iap-btn"
+                  disabled={purchaseBusy}
+                  onClick={() => void onPurchaseGuide()}
+                >
+                  {purchaseBusy ? '处理中…' : '立即解锁 · App Store'}
+                </button>
+                <button
+                  type="button"
+                  className="btn-text intro-hero-restore"
+                  disabled={purchaseBusy}
+                  onClick={() => void onRestorePurchase()}
+                >
+                  已购买？恢复购买
+                </button>
+                {purchaseError ? (
+                  <p className="intro-hero-iap-error" role="alert">{purchaseError}</p>
+                ) : null}
+              </div>
+            )
+          ) : null}
+        </div>
+      </section>
 
       <section className="tool-grid" aria-label="工具与知识">
         <button type="button" className="tool-card" onClick={onOpenCalculator}>
@@ -97,14 +167,6 @@ export function IntroScreen({
           </button>
         ) : null}
       </section>
-
-      {showPurchasedEntry && onOpenGuide ? (
-        <div className="intro-actions">
-          <button type="button" className="btn secondary" onClick={onOpenGuide}>
-            查看已购文档
-          </button>
-        </div>
-      ) : null}
 
       <p className="disclaimer">{DISCLAIMER_SHORT}</p>
       <p className="privacy-hint">{PRIVACY_HINT}</p>
